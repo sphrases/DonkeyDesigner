@@ -13,14 +13,17 @@ body {
 
 
 #heading {
-    font-size: 50px;
+    text-shadow: 2px 2px 2px #42c4c7, 0px 0px 40px #000000;
+
+    //text-shadow: 0px 0px 64px -2px rgba(0,0,0,0.75);
+
+    font-size: 60px;
     font-family: 'corbel';
     font-weight: bold;
     text-align: center;
     padding: 0;
     margin: 0 auto 10px auto;
     color: #ffffff;
-    display: block;
     position: relative;
 
 }
@@ -72,6 +75,9 @@ p {
 
 
 .donkeyButtons {
+    -webkit-box-shadow: 0px 0px 64px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 64px -2px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 64px -2px rgba(0,0,0,0.75);
     background-color: #42c4c7;
     display: block;
     cursor: pointer;
@@ -107,6 +113,9 @@ p {
 
 
 .canvas-container {
+    -webkit-box-shadow: 0px 0px 50px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 50px -2px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 50px -2px rgba(0,0,0,0.75);
     margin: 0px auto;
 }
 
