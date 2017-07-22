@@ -1,15 +1,21 @@
 * {
     padding: 0px;
     margin: 0px;
+
+}
+
+body {
+    background: #cfff69;
 }
 
 #heading {
-    font-size: 40px;
-    font-family: 'Helvetica';
+    font-size: 50px;
+    font-family: 'corbel';
+    font-weight: bold;
     text-align: center;
     padding: 0;
-    margin: 10px auto 0px auto;
-    color: black;
+    margin: 10px auto 10px auto;
+    color: #42c4c7;
     display: block;
 }
 
@@ -24,22 +30,64 @@ p {
 
 #donkeyCanvasDiv {
     text-align: center;
+    display: block;
+    position: relative;
+    width: 900px;
+    margin: 0px auto;
+
 }
 
-#donkeyButtonDiv {
+#donkeyButtonDivLeft {
     position: absolute;
+    display: block;
+    width: 700px;
+    margin: 0px auto;
 }
+
+#donkeyButtonDivRight {
+    position: relative;
+    display: block;
+    width: 800px;
+    margin: 0px auto;
+    float: right;
+}
+
+
+
 
 .donkeyButtons {
-    margin-top: 10px;
+    background-color: #42c4c7;
     display: block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Corbel;
+    font-size: 15px;
+    padding:5px 0px;
+    width: 100px;
+    text-decoration:none;
+    border: none;
+    margin-bottom: 10px;
 }
+#snapLeftButton {
+    float: right;
+    width: 98px;
+}
+
+.donkeyButtons:hover {
+    background-color: #43a3c7;
+}
+
+#removeElementButton {
+    background-color: #ff465b;
+}
+
+
 
 .canvas-container {
     margin: 0px auto;
 }
 
 #donkeyCanvas {
-    border: 2px dotted;
+    border: #42c4c7 2px solid;
 }
 

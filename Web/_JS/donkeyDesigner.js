@@ -1,11 +1,14 @@
-var donkeyCanvas = new fabric.Canvas('donkeyCanvas', {});
-donkeyCanvas.setWidth(1000);
+var donkeyCanvas = new fabric.Canvas('donkeyCanvas', {
+    backgroundColor : "#f4f4f4"
+});
+donkeyCanvas.setWidth(700);
 donkeyCanvas.setHeight(400);
+
 
 
 $('#addRectangleButton').click(function (e) {
     var rect = new fabric.Rect({
-        width: 200, height: 200, fill: 'blue', left: 50, top: 50
+        width: 100, height: 100, fill: 'blue', left: 50, top: 50
     });
     donkeyCanvas.add(rect); // add object
 
@@ -13,7 +16,7 @@ $('#addRectangleButton').click(function (e) {
 
 $('#addCircleButton').click(function (e) {
     var circ = new fabric.Circle({
-        radius: 100, fill: 'red', left: 50, top: 50
+        radius: 50, fill: 'red', left: 50, top: 50
     });
     donkeyCanvas.add(circ); // add object
 
