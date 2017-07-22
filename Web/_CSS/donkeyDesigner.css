@@ -1,0 +1,45 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+#heading {
+    font-size: 40px;
+    font-family: 'Helvetica';
+    text-align: center;
+    padding: 0;
+    margin: 10px auto 0px auto;
+    color: black;
+    display: block;
+}
+
+p {
+    font-size: 16px;
+    font-family: 'Arial';
+    text-align: center;
+    padding: 0;
+    margin: 0 auto;
+    color: black;
+}
+
+#donkeyCanvasDiv {
+    text-align: center;
+}
+
+#donkeyButtonDiv {
+    position: absolute;
+}
+
+.donkeyButtons {
+    margin-top: 10px;
+    display: block;
+}
+
+.canvas-container {
+    margin: 0px auto;
+}
+
+#donkeyCanvas {
+    border: 2px dotted;
+}
+

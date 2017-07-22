@@ -1,21 +1,35 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <!Meta info and title>
+    <!-- Meta info and title -->
     <meta charset="UTF-8">
     <link rel="icon" href="FAVICON" type="image/x-icon">
-    <title>TITLE</title>
-    <!^^^>
+    <title>Donkey Designer</title>
+    <!-- ^^^ -->
 
-    <!Stylesheets and script files>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
-    <!^^^>
+    <!-- Stylesheets and script files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <script src="../_JS/fabric.js"></script>
+    <link rel="stylesheet" href="../_CSS/donkeyDesigner.css"/>
+    <!-- ^^^ -->
 
 </head>
-<body>
+<body onload="">
+<div id="heading">DonkeyDesigner</div>
 
+
+<div id="donkeyCanvasDiv">
+    <div id="donkeyButtonDiv">
+        <button class="donkeyButtons" id="addRectangleButton">add rectangle</button>
+        <button class="donkeyButtons" id="addCircleButton">add circle</button>
+        <button class="donkeyButtons" id="removeElementButton">remove</button>
+    </div>
+    <canvas id="donkeyCanvas"></canvas>
+</div>
+
+
+<script src="../_JS/donkeyDesigner.js"></script>
 
 </body>
 </html>
