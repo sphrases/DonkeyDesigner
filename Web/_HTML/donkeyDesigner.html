@@ -10,14 +10,17 @@
     <!-- Stylesheets and script files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <script src="../_JS/fabric.js"></script>
+    <script src="../_JS/libs/fabric.js"></script>
     <link rel="stylesheet" href="../_CSS/donkeyDesigner.css"/>
+    <script src="../_JS/siteScript.js"></script>
+    <script src="../_JS/libs/granim.min.js"></script>
     <!-- ^^^ -->
 
 </head>
-<body onload="">
-<div id="heading">DonkeyDesigner</div>
+<body>
+<canvas id="granimInstance"></canvas>
 
+<div id="heading">DonkeyDesigner</div>
 
 <div id="donkeyCanvasDiv">
     <div class="">
@@ -32,14 +35,21 @@
 
         <div id="donkeyButtonDivRight">
             <button class="donkeyButtons" id="snapLeftButton">snap left</button>
+            <button class="donkeyButtons" id="fancyMode" onclick="fancyMode()">fancyMode</button>
+            <button class="donkeyButtons" id="exportButton">export</button>
 
         </div>
         <canvas id="donkeyCanvas"></canvas>
 
 
-
-
+        <script>
+            console.log('%c©derDonkey 2017! ', 'color:red; font-size: large');
+            //fancyMode();
+        </script>
         <script src="../_JS/donkeyDesigner.js"></script>
 
+
+    </div>
+</div>
 </body>
 </html>
