@@ -103,6 +103,22 @@ p {
     background-color: #43a3c7;
 }
 
+.controlButtons {
+
+    border: 2px solid #ffffff;
+    border-radius: 15px;
+    background-color: #ffffff;
+    display: inline-block;
+    cursor: pointer;
+    color: #43a3c7;
+    font-family: 'Arial Black';
+    font-size: 15px;
+    font-weight: bold;
+    padding:0px 0px 2px 0px;
+    width: 30px;
+    margin: 0px 10px 0px 10px;
+}
+
 #removeElementButton {
     background-color: #ff465b;
 }
@@ -120,6 +136,24 @@ p {
 }
 
 #donkeyCanvas {
+    border: #42c4c7 3px solid;
+}
+
+#elementSettingsDiv {
     border: #42c4c7 2px solid;
+
+    margin: 0px auto 0px auto;
+
+    width: 702px;
+
+    background: #42c4c7;
+    font-size: 28px;
+    font-family: 'arial';
+    font-weight: bold;
+
+
+}
+#elementSettingsDiv span {
+    top: 10px;
 }
 
