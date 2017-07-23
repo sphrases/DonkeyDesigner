@@ -9,19 +9,26 @@ donkeyCanvas.on('mouse:down', function (param) {
     if (object != null) {
         switch (object.get('type')) {
             case('circle'):
+                $('#elementSettingsDiv').empty();
                 //showCircleControls();
                 break;
             case('rect'):
+                $('#elementSettingsDiv').empty();
                 break;
             case('triangle'):
+                $('#elementSettingsDiv').empty();
                 break;
             case('image'):
+                $('#elementSettingsDiv').empty();
                 break;
             case('i-text'):
+                $('#elementSettingsDiv').empty();
                 break;
             case('text'):
+                $('#elementSettingsDiv').empty();
                 break;
             case('textbox'):
+                $('#elementSettingsDiv').empty();
                 showTextControls(object);
                 $('#elementSettingsDiv').visibility = true;
                 elemendAdded = true;
@@ -89,6 +96,9 @@ $('#exportButton').click(function (e) {
 });
 
 $('#addImageButton').click(function (e) {
+    for(var i = 0; i < images.length; i++) {
+        $("#elementSettingsDiv").append(images[i]);
+    }
 
 });
 

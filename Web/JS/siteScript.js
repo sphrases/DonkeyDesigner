@@ -28,6 +28,7 @@ var createImage = function(src, title) {
     img.src   = src;
     img.alt   = title;
     img.title = title;
+    img.class = 'preloadImage';
     return img;
 };
 
@@ -90,10 +91,12 @@ images.push(createImage("../RES/ZebraDesignerImages/BS_KITE.BMP", "BS_KITE"));
 images.push(createImage("../RES/ZebraDesignerImages/FI.BMP", "FI"));
 images.push(createImage("../RES/ZebraDesignerImages/DRIP.BMP", "DRIP"));
 
-
-
-
-
-
 // output
-console.log(images);
+function getImageByName(name) {
+    for(var i = 0; i < images.length; i++) {
+        if(images[i].title == name) {
+            return images[i];
+        }
+    }
+    return null;
+}
