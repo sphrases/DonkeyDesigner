@@ -4,70 +4,6 @@ var donkeyCanvas = new fabric.Canvas('donkeyCanvas', {
 donkeyCanvas.setWidth(700);
 donkeyCanvas.setHeight(400);
 
-var globalParams = {
-    borderColor: '#42c4c7',
-    cornerColor: '#42c4c7',
-    cornerSize: 8,
-    transparentCorners: false,
-    hasRotatingPoint: false
-}
-var elemendAdded = false;
-var dummyText = "This is a placeholder text, to see how your text-field looks";
-
-
-$('#addRectangleButton').click(function (e) {
-    var rect = new fabric.Rect({
-        width: 100, height: 100, fill: getRandomColor(), left: 50, top: 50
-    });
-    rect.set(globalParams);
-    donkeyCanvas.add(rect); // add object
-
-});
-
-$('#addCircleButton').click(function (e) {
-    var circ = new fabric.Circle({
-        radius: 50, fill: getRandomColor(), left: 50, top: 50
-    });
-    circ.set(globalParams);
-    donkeyCanvas.add(circ); // add object
-
-});
-
-
-$('#addTextButton').click(function (e) {
-    var textBox = new fabric.Textbox(dummyText, {
-        fontFamily: 'arial',
-        fontSize: 27,
-        fill: getRandomColor(),
-        left: 40,
-        top: 40,
-    });
-    textBox.set(globalParams);
-    donkeyCanvas.add(textBox);
-});
-
-
-$('#exportButton').click(function (e) {
-    exportToFile();
-});
-
-
-$('#removeElementButton').click(function (e) {
-    if (!(donkeyCanvas.getActiveGroup() == null && donkeyCanvas.getActiveObject() == null)) {
-        if (donkeyCanvas.getActiveGroup() == null) {
-            donkeyCanvas.getActiveObject().remove();
-        } else {
-            var activeGroup = donkeyCanvas.getActiveGroup().getObjects();
-            for (var i = 0; i < activeGroup.length; i++) {
-                activeGroup[i].remove();
-            }
-            donkeyCanvas.discardActiveGroup().renderAll();
-
-        }
-    }
-});
-
-
 donkeyCanvas.on('mouse:down', function (param) {
     var object = param.target;
     if (object != null) {
@@ -102,7 +38,80 @@ donkeyCanvas.on('mouse:down', function (param) {
 
 });
 
+var globalParams = {
+    borderColor: '#42c4c7',
+    cornerColor: '#42c4c7',
+    cornerSize: 8,
+    transparentCorners: false,
+    hasRotatingPoint: false
+}
+var elemendAdded = false;
+var dummyText = "This is a placeholder text, to see how your text-field looks";
 
+
+
+//Buttons
+$('#addRectangleButton').click(function (e) {
+    var rect = new fabric.Rect({
+        width: 100, height: 100, fill: getRandomColor(), left: 50, top: 50
+    });
+    rect.set(globalParams);
+    donkeyCanvas.add(rect); // add object
+
+});
+
+
+$('#addCircleButton').click(function (e) {
+    var circ = new fabric.Circle({
+        radius: 50, fill: getRandomColor(), left: 50, top: 50
+    });
+    circ.set(globalParams);
+    donkeyCanvas.add(circ); // add object
+
+});
+
+
+$('#addTextButton').click(function (e) {
+    var textBox = new fabric.Textbox(dummyText, {
+        fontFamily: 'arial',
+        fontSize: 27,
+        fill: getRandomColor(),
+        left: 40,
+        top: 40,
+    });
+    textBox.set(globalParams);
+    donkeyCanvas.add(textBox);
+});
+
+
+$('#exportButton').click(function (e) {
+    exportToFile();
+});
+
+$('#addImageButton').click(function (e) {
+
+});
+
+$('#removeElementButton').click(function (e) {
+    if (!(donkeyCanvas.getActiveGroup() == null && donkeyCanvas.getActiveObject() == null)) {
+        if (donkeyCanvas.getActiveGroup() == null) {
+            donkeyCanvas.getActiveObject().remove();
+        } else {
+            var activeGroup = donkeyCanvas.getActiveGroup().getObjects();
+            for (var i = 0; i < activeGroup.length; i++) {
+                activeGroup[i].remove();
+            }
+            donkeyCanvas.discardActiveGroup().renderAll();
+
+        }
+    }
+});
+
+
+
+
+
+//Other Functions
 function exportToFile() {
     donkeyCanvas._activeObject = null;
     if (donkeyCanvas.getObjects().length != 0) {
@@ -121,7 +130,11 @@ function exportToFile() {
         donkeyCanvas.setActiveGroup(group.setCoords()).renderAll();
         var allObjects = donkeyCanvas.getActiveGroup().getObjects();
 
-        var exportArray = [["#Export"]];
+        var date = new Date();
+        var dateTime = (date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1 ) + "-" + date.getUTCDate() + "--" + date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds());
+
+
+        var exportArray = [["# " + dateTime + " Export"]];
 
 
         for (var i = 0; i < allObjects.length; i++) {
@@ -140,55 +153,14 @@ function exportToFile() {
 
         var encodedUri = encodeURI(csvContent);
         var link = document.createElement("a");
+
         link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "export.txt");
+        link.setAttribute("download", dateTime + "-export.txt");
         document.body.appendChild(link); // Required for FF
 
         link.click(); // This will download the data file named "my_data.csv".
 
     }
-}
-
-
-function getShapeType(object) {
-    var objectArray = [];
-    switch (object.get('type')) {
-        case('circle'):
-            objectArray = ['circle', Math.floor(object.left), Math.floor(object.top), object.radius];
-            break;
-        case('rect'):
-            objectArray = ['rect', Math.floor(object.left), Math.floor(object.top), object.width, object.height];
-            break;
-        case('triangle'):
-            objectArray = ['triangle', Math.floor(object.left), Math.floor(object.top)];
-            break;
-        case('image'):
-            objectArray = ['image', Math.floor(object.left), Math.floor(object.top)];
-            break;
-        case('i-text'):
-            objectArray = ['i-text', Math.floor(object.left), Math.floor(object.top), Math.floor(object.width), Math.floor(object.height), object.fontSize, object.text];
-            break;
-        case('text'):
-            objectArray = ['text', Math.floor(object.left), Math.floor(object.top), Math.floor(object.width), Math.floor(object.height), object.fontSize, object.text];
-            break;
-        case('textbox'):
-            objectArray = ['textbox', Math.floor(object.left), Math.floor(object.top), Math.floor(object.width), Math.floor(object.height), object.fontSize, object.text];
-            break;
-        default:
-
-            break;
-    }
-    return objectArray;
-}
-
-
-function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
 }
 
 function showTextControls(object) {
@@ -226,3 +198,46 @@ function decreaseTextSize(object) {
     object.set('fontSize', fontSize);
     donkeyCanvas.renderAll();
 }
+
+
+//Get Value functions
+function getShapeType(object) {
+    var objectArray = [];
+    switch (object.get('type')) {
+        case('circle'):
+            objectArray = ['circle', Math.floor(object.left), Math.floor(object.top), object.radius];
+            break;
+        case('rect'):
+            objectArray = ['rect', Math.floor(object.left), Math.floor(object.top), object.width, object.height];
+            break;
+        case('triangle'):
+            objectArray = ['triangle', Math.floor(object.left), Math.floor(object.top)];
+            break;
+        case('image'):
+            objectArray = ['image', Math.floor(object.left), Math.floor(object.top)];
+            break;
+        case('i-text'):
+            objectArray = ['i-text', Math.floor(object.left), Math.floor(object.top), Math.floor(object.width), Math.floor(object.height), object.fontSize, object.text];
+            break;
+        case('text'):
+            objectArray = ['text', Math.floor(object.left), Math.floor(object.top), Math.floor(object.width), Math.floor(object.height), object.fontSize, object.text];
+            break;
+        case('textbox'):
+            objectArray = ['textbox', Math.floor(object.left), Math.floor(object.top), Math.floor(object.width), Math.floor(object.height), object.fontSize, object.text];
+            break;
+        default:
+
+            break;
+    }
+    return objectArray;
+}
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+

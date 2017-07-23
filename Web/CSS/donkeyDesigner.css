@@ -10,7 +10,14 @@ body {
     background: #c4c3c4;
 }
 
-
+p {
+    font-size: 16px;
+    font-family: 'Arial';
+    text-align: center;
+    padding: 0;
+    margin: 0 auto;
+    color: black;
+}
 
 #heading {
     text-shadow: 2px 2px 2px #42c4c7, 0px 0px 40px #000000;
@@ -38,25 +45,9 @@ body {
 
 }
 
-p {
-    font-size: 16px;
-    font-family: 'Arial';
-    text-align: center;
-    padding: 0;
-    margin: 0 auto;
-    color: black;
-}
-
-#donkeyCanvasDiv {
-    text-align: center;
-    display: block;
-    position: relative;
-    width: 900px;
-    margin: 0px auto;
-
-}
 
 
+/* ButtonDivs */
 #donkeyButtonDivLeft {
     position: absolute;
     display: block;
@@ -74,29 +65,26 @@ p {
 }
 
 
+
+/* Buttons */
 .donkeyButtons {
-    -webkit-box-shadow: 0px 0px 64px -2px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 64px -2px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 64px -2px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.50);
+    -moz-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.50);
+    box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.50);
     background-color: #42c4c7;
+    border: none;
+    border-radius: 4px 0px 0px 4px;
     display: block;
     cursor: pointer;
     color: #ffffff;
-    font-family: Corbel;
+    font-family: 'Corbel';
     font-size: 15px;
     font-weight: bold;
     padding:5px 0px;
     width: 100px;
     text-decoration:none;
-    border: none;
-    margin-bottom: 10px;
-}
 
-#donkeyButtonDivRight * {
-    width: 100px;
-
-    position: relative;
-    display: block;
+    margin-top: 10px;
 }
 
 .donkeyButtons:hover {
@@ -119,6 +107,13 @@ p {
     margin: 0px 10px 0px 10px;
 }
 
+#donkeyButtonDivRight * {
+    width: 100px;
+    border-radius: 0px 4px 4px 0px;
+    position: relative;
+    display: block;
+}
+
 #removeElementButton {
     background-color: #ff465b;
 }
@@ -127,6 +122,17 @@ p {
     background-color: #387d98;
 }
 
+
+
+/* DonkeyCanvas */
+#donkeyCanvasDiv {
+    text-align: center;
+    display: block;
+    position: relative;
+    width: 900px;
+    margin: 0px auto;
+
+}
 
 .canvas-container {
     -webkit-box-shadow: 0px 0px 50px -2px rgba(0,0,0,0.75);
@@ -139,20 +145,19 @@ p {
     border: #42c4c7 3px solid;
 }
 
+
+
+/* elementsSettingsDiv */
 #elementSettingsDiv {
     border: #42c4c7 2px solid;
-
     margin: 0px auto 0px auto;
-
     width: 702px;
-
     background: #42c4c7;
     font-size: 28px;
     font-family: 'arial';
     font-weight: bold;
-
-
 }
+
 #elementSettingsDiv span {
     top: 10px;
 }
