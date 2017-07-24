@@ -13,8 +13,8 @@ function fancyMode() {
             "default-state": {
                 gradients: [
                     ['#42c4c7', '#ff465b'],
-                    ['#ffb646', '#68c74e']
-
+                    ['#ffb646', '#68c74e'],
+                    ['#54ffee', '#68c74e']
                 ]
             }
         }
@@ -29,6 +29,15 @@ var createImage = function(src, title) {
     img.alt   = title;
     img.title = title;
     img.class = 'preloadImage';
+    img.style.width = "120px";
+    img.style.height = "auto";
+    img.style.margin = "10px";
+
+    img.onclick = function() {
+        addImageElement(img);
+        $('#elementSettingsDiv').empty();
+
+    };
     return img;
 };
 
@@ -61,7 +70,6 @@ images.push(createImage("../RES/ZebraDesignerImages/COPY_RGT.BMP", "COPY_RGT"));
 images.push(createImage("../RES/ZebraDesignerImages/SYMKLFP.bmp", "SYMKLFP"));
 images.push(createImage("../RES/ZebraDesignerImages/SYMBOLN.bmp", "SYMBOLN"));
 images.push(createImage("../RES/ZebraDesignerImages/SYMBOLE.bmp", "SYMBOLE"));
-images.push(createImage("../RES/ZebraDesignerImages/leisure.wmf", "leisure.wmf"));
 images.push(createImage("../RES/ZebraDesignerImages/FRAGILE.BMP", "FRAGILE"));
 images.push(createImage("../RES/ZebraDesignerImages/SYMKLN.bmp", "SYMKLN"));
 images.push(createImage("../RES/ZebraDesignerImages/FLAMMABL.BMP", "FLAMMABL"));

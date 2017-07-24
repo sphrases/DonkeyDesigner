@@ -39,8 +39,13 @@
             <button class="donkeyButtons" id="snapLeftButton">snap left</button>
             <button class="donkeyButtons" id="fancyMode" onclick="fancyMode()">fancyMode</button>
             <button class="donkeyButtons" id="popOutButton"
-                    onclick="window.open(window.location.href, 'Donkey Designer', 'height=580, width=940'); window.close();">
-                new window
+                    onclick="{
+                        if(confirm('Popping out the window will now save the current state, are you sure you want to pop out the window?')) {
+                            window.open(window.location.href, 'Donkey Designer', 'height=580, width=940');
+                            window.close();
+                        }
+                   }">
+                pop out
             </button>
             <button class="donkeyButtons" id="exportButton">export</button>
 

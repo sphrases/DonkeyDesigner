@@ -1,5 +1,5 @@
 var donkeyCanvas = new fabric.Canvas('donkeyCanvas', {
-    backgroundColor: "#f4f4f4"
+    backgroundColor: "#ffffff"
 });
 donkeyCanvas.setWidth(700);
 donkeyCanvas.setHeight(400);
@@ -20,6 +20,9 @@ donkeyCanvas.on('mouse:down', function (param) {
                 break;
             case('image'):
                 $('#elementSettingsDiv').empty();
+                showImageControls(object);
+                $('#elementSettingsDiv').visibility = true;
+                elemendAdded = true;
                 break;
             case('i-text'):
                 $('#elementSettingsDiv').empty();
@@ -28,10 +31,16 @@ donkeyCanvas.on('mouse:down', function (param) {
                 $('#elementSettingsDiv').empty();
                 break;
             case('textbox'):
-                $('#elementSettingsDiv').empty();
-                showTextControls(object);
-                $('#elementSettingsDiv').visibility = true;
-                elemendAdded = true;
+                if(donkeyCanvas.getActiveObject().get('type') == 'textBox') {
+                    $('#elementSettingsDiv').empty();
+                    showTextControls(object);
+                    $('#elementSettingsDiv').visibility = true;
+                }   else {
+                    $('#elementSettingsDiv').empty();
+                    showTextControls(object);
+                    $('#elementSettingsDiv').visibility = true;
+                    elemendAdded = true;
+                }
                 break;
             default:
 
@@ -56,21 +65,19 @@ var elemendAdded = false;
 var dummyText = "This is a placeholder text, to see how your text-field looks";
 
 
-
 //Buttons
 $('#addRectangleButton').click(function (e) {
     var rect = new fabric.Rect({
-        width: 100, height: 100, fill: getRandomColor(), left: 50, top: 50
+        width: 100, height: 100, fill: 'black', left: 50, top: 50
     });
     rect.set(globalParams);
     donkeyCanvas.add(rect); // add object
-
 });
 
 
 $('#addCircleButton').click(function (e) {
     var circ = new fabric.Circle({
-        radius: 50, fill: getRandomColor(), left: 50, top: 50
+        radius: 50, fill: 'black', left: 50, top: 50
     });
     circ.set(globalParams);
     donkeyCanvas.add(circ); // add object
@@ -82,7 +89,7 @@ $('#addTextButton').click(function (e) {
     var textBox = new fabric.Textbox(dummyText, {
         fontFamily: 'arial',
         fontSize: 27,
-        fill: getRandomColor(),
+        fill: 'black',
         left: 40,
         top: 40,
     });
@@ -96,7 +103,8 @@ $('#exportButton').click(function (e) {
 });
 
 $('#addImageButton').click(function (e) {
-    for(var i = 0; i < images.length; i++) {
+    $('#elementSettingsDiv').empty();
+    for (var i = 0; i < images.length; i++) {
         $("#elementSettingsDiv").append(images[i]);
     }
 
@@ -118,58 +126,57 @@ $('#removeElementButton').click(function (e) {
 });
 
 
-
-
-
 //Other Functions
 function exportToFile() {
-    donkeyCanvas._activeObject = null;
-    if (donkeyCanvas.getObjects().length != 0) {
+    if(true) {
         donkeyCanvas._activeObject = null;
-        var objs = donkeyCanvas.getObjects().map(function (o) {
-            return o.set('active', true);
-        });
+        if (donkeyCanvas.getObjects().length != 0) {
+            donkeyCanvas._activeObject = null;
+            var objs = donkeyCanvas.getObjects().map(function (o) {
+                return o.set('active', true);
+            });
 
 
-        var group = new fabric.Group(objs, {
-            originX: 'center',
-            originY: 'center'
-        });
+            var group = new fabric.Group(objs, {
+                originX: 'center',
+                originY: 'center'
+            });
 
-        donkeyCanvas._activeObject = null;
-        donkeyCanvas.setActiveGroup(group.setCoords()).renderAll();
-        var allObjects = donkeyCanvas.getActiveGroup().getObjects();
+            donkeyCanvas._activeObject = null;
+            donkeyCanvas.setActiveGroup(group.setCoords()).renderAll();
+            var allObjects = donkeyCanvas.getActiveGroup().getObjects();
 
-        var date = new Date();
-        var dateTime = (date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1 ) + "-" + date.getUTCDate() + "--" + date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds());
-
-
-        var exportArray = [["# " + dateTime + " Export"]];
+            var date = new Date();
+            var dateTime = (date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1 ) + "-" + date.getUTCDate() + "--" + date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds());
 
 
-        for (var i = 0; i < allObjects.length; i++) {
-            exportArray.push(getShapeType(allObjects[i]));
+            var exportArray = [["# " + dateTime + " Export"]];
+
+
+            for (var i = 0; i < allObjects.length; i++) {
+                exportArray.push(getShapeType(allObjects[i]));
+            }
+            //exportArray done
+            console.log(exportArray);
+            //now to txt file
+
+            var csvContent = "data:text/plain;charset=utf-8,";
+            exportArray.forEach(function (infoArray, index) {
+                var dataString = infoArray.join(",");
+                csvContent += index < exportArray.length ? dataString + "\n" : dataString;
+
+            });
+
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", dateTime + "-export.txt");
+            document.body.appendChild(link); // Required for FF
+
+            link.click(); // This will download the data file named "my_data.csv".
+
         }
-        //exportArray done
-        console.log(exportArray);
-        //now to txt file
-
-        var csvContent = "data:text/plain;charset=utf-8,";
-        exportArray.forEach(function (infoArray, index) {
-            var dataString = infoArray.join(",");
-            csvContent += index < exportArray.length ? dataString + "\n" : dataString;
-
-        });
-
-        var encodedUri = encodeURI(csvContent);
-        var link = document.createElement("a");
-
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", dateTime + "-export.txt");
-        document.body.appendChild(link); // Required for FF
-
-        link.click(); // This will download the data file named "my_data.csv".
-
     }
 }
 
@@ -193,6 +200,24 @@ function showTextControls(object) {
     }
 }
 
+function showImageControls(object) {
+    var div = document.createElement("div");
+    div.style.width = "500px";
+    div.style.color = "white";
+    div.style.margin = "10px auto"
+
+    var button = document.createElement("button");
+    button.class = "donkeyButtons";
+
+
+    div.innerHTML = "<button class='controlButtons'  onclick='rotateElement(-45)'>" +
+        "<</button>" +
+        "<span>rotate image</span>" +
+        "<button class='controlButtons'  onclick='rotateElement(45)'>" +
+        "></button>";
+    document.getElementById('elementSettingsDiv').appendChild(div);
+}
+
 function increaseTextSize() {
     var object = donkeyCanvas.getActiveObject();
     var fontSize = object.get('fontSize');
@@ -206,6 +231,12 @@ function decreaseTextSize(object) {
     var fontSize = object.get('fontSize');
     fontSize -= 1;
     object.set('fontSize', fontSize);
+    donkeyCanvas.renderAll();
+}
+
+function rotateElement(angle) {
+    var currAngle = donkeyCanvas.getActiveObject().getAngle();
+    donkeyCanvas.getActiveObject().setAngle(currAngle + angle);
     donkeyCanvas.renderAll();
 }
 
@@ -249,5 +280,19 @@ function getRandomColor() {
         color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
+}
+
+//add images
+function addImageElement(image) {
+    fabric.Image.fromURL(image.src, function (eimg) {
+        eimg.scaleToWidth(100);
+
+        eimg.set({'left': 100});
+        eimg.set({'top': 100});
+        eimg.set({'snapAngle': 45});
+        donkeyCanvas.add(eimg); // add object
+        donkeyCanvas.renderAll();
+    });
+
 }
 
