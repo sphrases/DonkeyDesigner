@@ -10,16 +10,20 @@ donkeyCanvas.on('mouse:down', function (param) {
         switch (object.get('type')) {
             case('circle'):
                 $('#elementSettingsDiv').empty();
+                addColorPicker();
                 //showCircleControls();
                 break;
             case('rect'):
                 $('#elementSettingsDiv').empty();
+                addColorPicker();
                 break;
             case('triangle'):
                 $('#elementSettingsDiv').empty();
+                addColorPicker();
                 break;
             case('image'):
                 $('#elementSettingsDiv').empty();
+                addColorPicker();
                 showImageControls(object);
                 $('#elementSettingsDiv').visibility = true;
                 elemendAdded = true;
@@ -32,11 +36,14 @@ donkeyCanvas.on('mouse:down', function (param) {
                 break;
             case('textbox'):
                 if(donkeyCanvas.getActiveObject().get('type') == 'textBox') {
+
                     $('#elementSettingsDiv').empty();
+                    addColorPicker();
                     showTextControls(object);
                     $('#elementSettingsDiv').visibility = true;
                 }   else {
                     $('#elementSettingsDiv').empty();
+                    addColorPicker();
                     showTextControls(object);
                     $('#elementSettingsDiv').visibility = true;
                     elemendAdded = true;
@@ -296,3 +303,26 @@ function addImageElement(image) {
 
 }
 
+function addColorPicker() {
+    if (!elemendAdded) {
+
+        var div = document.createElement("div");
+        div.style.width = "500px";
+        div.style.color = "white";
+        div.style.margin = "10px auto"
+
+
+        div.innerHTML = "<input name='color2' type='hidden' id='color_value' value='99cc00'>"+
+            "<button  class='jscolor {valueElement: 'color_value'}' style='border: none;padding: 3px ;border-radius: 4px 4px 4px 4px;color: #ffffff;'>pick a color</button>"+
+            "";
+
+
+
+        document.getElementById('elementSettingsDiv').appendChild(div);
+    }
+}
+
+function changeColor() {
+    var newColor = $('#color_value').value;
+    donkeyCanvas.getActiveObject().set({'color': newColor});
+}
